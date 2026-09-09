@@ -34,6 +34,14 @@ pub fn run() {
                                     .args(["-e", &script])
                                     .spawn();
                             }
+                            #[cfg(target_os = "linux")]
+                            {
+                                let pid = std::process::id();
+                                let _ = std::process::Command::new("xdotool")
+                                    .args(["search", "--pid", &pid.to_string(),
+                                           "windowactivate", "--sync"])
+                                    .spawn();
+                            }
                             let _ = app.emit("crosspilot://show", ());
                         }
                     }
