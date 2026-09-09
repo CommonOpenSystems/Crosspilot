@@ -1,25 +1,39 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getCurrentWindow } from "@tauri-apps/api/window";
+import { listen } from "@tauri-apps/api/event";
 import "./App.css";
 
 function App() {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const [content, setContent] = useState("");
 
-  // Auto-focus the textarea on mount
-  useEffect(() => {
-    textareaRef.current?.focus();
-  }, []);
-
-  // Close window on Escape
+  // Hide window and clear content on Escape
   useEffect(() => {
     const handleKeyDown = async (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         const win = getCurrentWindow();
-        await win.close();
+        setContent("");
+        await win.hide();
       }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  // Focus textarea when window is shown via shortcut
+  useEffect(() => {
+    const unlisten = listen("crosspilot://show", () => {
+      textareaRef.current?.focus();
+    });
+    return () => { unlisten.then((fn) => fn()); };
+  }, []);
+
+  // Clear textarea when window is hidden via shortcut
+  useEffect(() => {
+    const unlisten = listen("crosspilot://hide", () => {
+      setContent("");
+    });
+    return () => { unlisten.then((fn) => fn()); };
   }, []);
 
   return (
@@ -30,6 +44,8 @@ function App() {
         className="editor"
         placeholder="Start typing..."
         spellCheck={false}
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
       />
     </div>
   );
