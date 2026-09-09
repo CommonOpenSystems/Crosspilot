@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Background circle -->
+  <circle cx="50" cy="50" r="48" fill="#12121e"/>
+  <!-- Gold outer ring -->
+  <circle cx="50" cy="50" r="46" fill="none" stroke="#d4af37" stroke-width="3"/>
+  <!-- Inner guide circle -->
+  <circle cx="50" cy="50" r="28" fill="none" stroke="#d4af3750" stroke-width="1"/>
+  <!-- Cardinal tick marks -->
+  <line x1="50" y1="5"  x2="50" y2="13" stroke="#d4af37" stroke-width="2" stroke-linecap="round"/>
+  <line x1="50" y1="87" x2="50" y2="95" stroke="#d4af37" stroke-width="2" stroke-linecap="round"/>
+  <line x1="5"  y1="50" x2="13" y2="50" stroke="#d4af37" stroke-width="2" stroke-linecap="round"/>
+  <line x1="87" y1="50" x2="95" y2="50" stroke="#d4af37" stroke-width="2" stroke-linecap="round"/>
+  <!-- Ordinal tick marks -->
+  <line x1="18.6" y1="18.6" x2="24.0" y2="24.0" stroke="#d4af3799" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="81.4" y1="18.6" x2="76.0" y2="24.0" stroke="#d4af3799" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="18.6" y1="81.4" x2="24.0" y2="76.0" stroke="#d4af3799" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="81.4" y1="81.4" x2="76.0" y2="76.0" stroke="#d4af3799" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- North needle (white) -->
+  <polygon points="50,16 53.5,50 50,44 46.5,50" fill="#ffffff"/>
+  <!-- South needle (red) -->
+  <polygon points="50,84 53.5,50 50,56 46.5,50" fill="#a03c3c"/>
+  <!-- Centre dot -->
+  <circle cx="50" cy="50" r="4.5" fill="#d4af37"/>
+  <circle cx="50" cy="50" r="2"   fill="#12121e"/>
+</svg>
