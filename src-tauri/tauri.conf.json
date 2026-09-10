@@ -13,12 +13,12 @@
     "windows": [
       {
         "title": "crosspilot",
-        "width": 500,
-        "height": 350,
+        "width": 380,
+        "height": 520,
         "resizable": true,
         "decorations": false,
         "alwaysOnTop": true,
-        "center": true,
+        "center": false,
         "transparent": false,
         "visible": false,
         "focus": false

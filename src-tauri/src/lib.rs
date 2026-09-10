@@ -20,7 +20,19 @@ pub fn run() {
                             let _ = app.emit("crosspilot://hide", ());
                             let _ = window.hide();
                         } else {
-                            let _ = window.center();
+                            if let Ok(Some(monitor)) = window.current_monitor()
+                                .or_else(|_| window.primary_monitor())
+                            {
+                                let screen = monitor.size();
+                                let scale = monitor.scale_factor();
+                                let win_w = (380.0 * scale) as u32;
+                                let win_h = (520.0 * scale) as u32;
+                                let margin = (16.0 * scale) as u32;
+                                let x = (screen.width.saturating_sub(win_w + margin)) as i32;
+                                let y = (screen.height.saturating_sub(win_h + margin)) as i32;
+                                let _ = window.set_size(tauri::Size::Physical(tauri::PhysicalSize { width: win_w, height: win_h }));
+                                let _ = window.set_position(tauri::Position::Physical(tauri::PhysicalPosition { x, y }));
+                            }
                             let _ = window.show();
                             let _ = window.set_focus();
                             #[cfg(target_os = "macos")]
